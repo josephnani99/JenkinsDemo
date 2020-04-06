@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     echo "deployment"
-                    sh 'cp MavenProject/multi3/target/*.war /Applications/apache-tomcat-7.0.88/webapps/'
+                    sh 'deploy adapters: [tomcat8(credentialsId: '3526fae7-08ef-4fdc-8d8b-aa6bafb35f40', path: '', url: 'http://localhost:8888/')], contextPath: '/var/lib/tomcat8/webapps', war: '**/*.war''
                 }
             }
         }
