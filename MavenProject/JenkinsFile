@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     echo "deployment"
-                    sh 'deploy adapters: [tomcat9(credentialsId: '61e6733b-def3-4e54-b257-c2e7f27306d8', path: '', url: 'http://172.31.15.140:8888')], contextPath: '/opt/apache-tomcat-9.0.13/webapps', war: '**/*.war'
+                    sh deploy adapters: [tomcat9(credentialsId: '61e6733b-def3-4e54-b257-c2e7f27306d8', path: '', url: 'http://172.31.15.140:8888')], contextPath: '/opt/apache-tomcat-9.0.13/webapps', war: '**/*.war'
                 }
             }
         }
