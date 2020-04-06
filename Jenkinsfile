@@ -4,7 +4,7 @@ pipeline {
         stage('Clone') {
             steps {
                 echo "checking out the repo"
-                git 'https://github.com/edureka-devops/jenkins-demo.git'
+                git 'https://github.com/josephnani99/JenkinsDemo.git'
             
             }
         }
@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     echo "deployment"
-                    sh 'deploy adapters: [tomcat8(credentialsId: '3526fae7-08ef-4fdc-8d8b-aa6bafb35f40', path: '', url: 'http://localhost:8888/')], contextPath: '/var/lib/tomcat8/webapps', war: '**/*.war''
+                    deploy adapters: [tomcat9(credentialsId: '61e6733b-def3-4e54-b257-c2e7f27306d8', path: '', url: 'http://172.31.15.140:8888')], contextPath: '/opt/apache-tomcat-9.0.13/webapps', war: '**/*.war'
                 }
             }
         }
@@ -47,13 +47,13 @@ pipeline {
             steps{
             parallel ( "JavaNcss Report":   
             {
-                git 'https://github.com/edureka-devops/jenkins-demo.git'
+                git 'https://github.com/josephnani99/JenkinsDemo.git'
                 sh "cd javancss-master ; mvn test javancss:report ; pwd"
                   
             },
             "FindBugs Report" : {
                 sh "mkdir javancss1 ; cd javancss1 ;pwd"
-                git 'https://github.com/edureka-devops/jenkins-demo.git'
+                git 'https://github.com/josephnani99/JenkinsDemo.git'
                 sh "cd javancss-master ; mvn findbugs:findbugs ; pwd"
                 deleteDir()
 
@@ -62,7 +62,7 @@ pipeline {
             }
          post{
                 success {
-                    emailext body: 'Successfully completed pipeline project with archiving the artifacts', subject: 'Pipeline was successfull', to: 'vathsala.hn22@gmail.com'
+                    emailext body: 'Successfully completed pipeline project with archiving the artifacts', subject: 'Pipeline was successfull', to: 'joseph.nani99@gmail.com'
                 }
     }
 }
