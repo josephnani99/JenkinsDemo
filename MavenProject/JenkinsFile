@@ -22,7 +22,7 @@ pipeline {
             }
             
         }
-        stage('Deployment') {
+        stage('Release_Deployment') {
             // Deployment
             steps {
                 script {
