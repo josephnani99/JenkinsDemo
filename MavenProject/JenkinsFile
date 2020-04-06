@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     echo "deployment"
-                    sh 'deploy adapters: [tomcat8(credentialsId: '3526fae7-08ef-4fdc-8d8b-aa6bafb35f40', path: '', url: 'http://localhost:8888/')], contextPath: '/var/lib/tomcat8/webapps', war: '**/*.war''
+                    sh 'deploy adapters: [tomcat9(credentialsId: '61e6733b-def3-4e54-b257-c2e7f27306d8', path: '', url: 'http://172.31.15.140:8888')], contextPath: '/opt/apache-tomcat-9.0.13/webapps', war: '**/*.war'
                 }
             }
         }
@@ -47,13 +47,13 @@ pipeline {
             steps{
             parallel ( "JavaNcss Report":   
             {
-              node('window'){
+              node('slave1'){
                 git 'https://github.com/vathsalahn/jenkins-demo.git'
                 sh "cd javancss-master ; mvn test javancss:report ; pwd"
                   }
             },
             "FindBugs Report" : {
-            node('window'){
+            node('slave1'){
                 sh "mkdir javancss1 ; cd javancss1 ;pwd"
                 git 'https://github.com/vathsalahn/jenkins-demo.git'
                 sh "cd javancss-master ; mvn findbugs:findbugs ; pwd"
